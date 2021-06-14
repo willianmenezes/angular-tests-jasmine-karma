@@ -43,5 +43,4 @@ describe(UniqueIdService.name, () => {
           .toThrow();
       });
     });
-
 });

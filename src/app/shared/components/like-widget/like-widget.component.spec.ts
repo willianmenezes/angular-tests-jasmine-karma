@@ -7,6 +7,7 @@ describe(LikeWidgetComponent.name, () => {
 
   // embrulha meu componente, ajuda durante o teste
   let fixture: ComponentFixture<LikeWidgetComponent> = null;
+  let component: LikeWidgetComponent = null;
 
   beforeEach(async () => {
 
@@ -15,21 +16,19 @@ describe(LikeWidgetComponent.name, () => {
     }).compileComponents(); // aguarda a compilação do componente inteiro, angular faz a requisição asyncrona
 
     fixture = TestBed.createComponent(LikeWidgetComponent);
+    component = fixture.componentInstance;
   });
 
   it('Should create component', () => {
-    const component = fixture.componentInstance;
     expect(component).toBeTruthy();
   });
 
   it('Should auto generate Id when id input property is missing', () => {
-    const component = fixture.componentInstance;
     fixture.detectChanges();
     expect(component.id).toBeTruthy();
   });
 
   it('Should not generate Id when id input property is present', () => {
-    const component = fixture.componentInstance;
     const someId = 'idTeste'
     component.id = someId;
     fixture.detectChanges();

@@ -1,7 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
-import { UniqueIdService } from "../../services/unique-id/unique-id.service";
 import { LikeWidgetComponent } from "./like-widget.component";
 import { LikeWidgetModule } from "./like-widget.module";
 
@@ -17,12 +15,25 @@ describe(LikeWidgetComponent.name, () => {
     }).compileComponents(); // aguarda a compilação do componente inteiro, angular faz a requisição asyncrona
 
     fixture = TestBed.createComponent(LikeWidgetComponent);
-
   });
 
   it('Should create component', () => {
-    const instance = fixture.componentInstance;
-    expect(instance).toBeTruthy();
+    const component = fixture.componentInstance;
+    expect(component).toBeTruthy();
+  });
+
+  it('Should auto generate Id when id input property is missing', () => {
+    const component = fixture.componentInstance;
+    fixture.detectChanges();
+    expect(component.id).toBeTruthy();
+  });
+
+  it('Should not generate Id when id input property is present', () => {
+    const component = fixture.componentInstance;
+    const someId = 'idTeste'
+    component.id = someId;
+    fixture.detectChanges();
+    expect(component.id).toBe(someId);
   });
 
 

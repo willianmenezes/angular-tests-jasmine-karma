@@ -1,18 +1,16 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LikeWidgetComponent } from "./like-widget.component";
-import { LikeWidgetModule } from "./like-widget.module";
+import { LikeWidgetComponent } from './like-widget.component';
+import { LikeWidgetModule } from './like-widget.module';
 
 describe(LikeWidgetComponent.name, () => {
-
   // embrulha meu componente, ajuda durante o teste
   let fixture: ComponentFixture<LikeWidgetComponent> = null;
   let component: LikeWidgetComponent = null;
 
   beforeEach(async () => {
-
     await TestBed.configureTestingModule({
-      imports: [LikeWidgetModule]
+      imports: [LikeWidgetModule],
     }).compileComponents(); // aguarda a compilação do componente inteiro, angular faz a requisição asyncrona
 
     fixture = TestBed.createComponent(LikeWidgetComponent);
@@ -29,11 +27,18 @@ describe(LikeWidgetComponent.name, () => {
   });
 
   it('Should not generate Id when id input property is present', () => {
-    const someId = 'idTeste'
+    const someId = 'idTeste';
     component.id = someId;
     fixture.detectChanges();
     expect(component.id).toBe(someId);
   });
 
-
+  it(`#${LikeWidgetComponent.prototype.like.name} should trigger emission when called`, (done) => {
+    fixture.detectChanges();
+    component.liked.subscribe(() => {
+      expect(true).toBeTrue();
+      done();
+    });
+    component.like();
+  });
 });
